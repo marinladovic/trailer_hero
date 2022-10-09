@@ -218,3 +218,57 @@ export interface Element {
     | 'Trailer'
     | 'Teaser';
 }
+
+export interface Person {
+  known_for: MediaItem[];
+  known_for_department: string;
+  name: string;
+  popularity: number;
+  profile_path: string;
+}
+
+export interface PersonDetails {
+  also_known_as: string[];
+  biography: string;
+  birthday: string;
+  deathday: string;
+  homepage: string;
+  id: number;
+  imdb_id: string;
+  name: string;
+  place_of_birth: string;
+  popularity: number;
+  profile_path: string;
+  combined_credits: {
+    cast?: PersonalCredit[];
+    crew?: PersonalCredit[];
+  };
+  images: {
+    profiles: [
+      {
+        aspect_ratio: number;
+        file_path: string;
+        height: number;
+        width: number;
+      }
+    ];
+  };
+}
+
+interface PersonalCredit {
+  backdrop_path: string;
+  genre_ids: number[];
+  id: number;
+  media_type: string;
+  title?: string;
+  name?: string;
+  overview: string;
+  poster_path: string;
+  vote_average: number;
+  vote_count: number;
+  character?: string;
+  department?: string;
+  job?: string;
+  release_date?: string;
+  first_air_date?: string;
+}

@@ -59,7 +59,7 @@ function Tv({
         <Banner trendingNow={popularShows} type="tv" />
         <SelectGenre mediaType="tv" />
         {!genre ? (
-          <section className=" space-y-12 md:space-y-24">
+          <section className="space-y-12 md:space-y-24">
             <Row
               title="Shows Airing Today"
               items={showsAiringToday}
