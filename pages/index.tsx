@@ -1,86 +1,132 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
+import Head from 'next/head';
+import Header from '../components/shared/Header';
+import Banner from '../components/shared/Banner';
+import Row from '../components/shared/Row';
+import Modal from '../components/shared/Modal';
+import { MediaItem } from '../typings';
+import homeRequests from '../utils/homeRequests';
+import { modalState } from '../atoms/modalAtom';
+import { useRecoilValue } from 'recoil';
 
-const Home: NextPage = () => {
-  return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="rounded-md bg-gray-100 p-3 font-mono text-lg">
-            pages/index.tsx
-          </code>
-        </p>
-
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and its API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center gap-2"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </a>
-      </footer>
-    </div>
-  )
+interface Props {
+  popularShows: MediaItem[];
+  trending: MediaItem[];
+  actionAndAdventureShows: MediaItem[];
+  crimeShows: MediaItem[];
+  fantasyShows: MediaItem[];
+  popularMovies: MediaItem[];
+  comedyMovies: MediaItem[];
+  horrorMovies: MediaItem[];
+  kidsShows: MediaItem[];
+  politicalDramaShows: MediaItem[];
 }
 
-export default Home
+const Home = ({
+  popularShows,
+  trending,
+  actionAndAdventureShows,
+  crimeShows,
+  fantasyShows,
+  popularMovies,
+  comedyMovies,
+  horrorMovies,
+  kidsShows,
+  politicalDramaShows,
+}: Props) => {
+  const showModal = useRecoilValue(modalState);
+
+  return (
+    <div
+      className={`relative h-screen bg-gradient-to-b lg:h-[140vh] ${
+        showModal && '!h-screen overflow-hidden'
+      }`}
+    >
+      <Head>
+        <title>TrailerHero | What to Watch Next</title>
+        <link rel="icon" href="/favicon.png" />
+      </Head>
+      <Header />
+      <main className="relative pl-4 pb-24 lg:space-y-24 lg:pl-16">
+        <Banner trendingNow={trending} />
+        <section className=" space-y-12 md:space-y-24">
+          <Row
+            title="Most Popular Shows Today"
+            items={popularShows}
+            media_type="tv"
+          />
+          <Row title="Trending Now" items={trending} />
+          <Row
+            title="Action & Adventure"
+            items={actionAndAdventureShows}
+            media_type="tv"
+          />
+          <Row title="Popular Crime Shows" items={crimeShows} media_type="tv" />
+          <Row
+            title="Bingeworthy Fantasy Shows"
+            items={fantasyShows}
+            media_type="tv"
+          />
+          <Row
+            title="Most Popular Movies Today"
+            items={popularMovies}
+            media_type="movie"
+          />
+          <Row title="Comedy Movies" items={comedyMovies} media_type="movie" />
+          <Row title="Scary Movies" items={horrorMovies} media_type="movie" />
+          <Row title="Kids Shows" items={kidsShows} media_type="tv" />
+          <Row
+            title="War & Politics"
+            items={politicalDramaShows}
+            media_type="tv"
+          />
+        </section>
+      </main>
+
+      {showModal && <Modal />}
+    </div>
+  );
+};
+
+export default Home;
+
+/** SSR - Requests */
+export const getServerSideProps = async () => {
+  const [
+    popularShows,
+    trending,
+    actionAndAdventureShows,
+    crimeShows,
+    fantasyShows,
+    popularMovies,
+    comedyMovies,
+    horrorMovies,
+    kidsShows,
+    politicalDramaShows,
+  ] = await Promise.all([
+    fetch(homeRequests.fetchPopularShows).then((res) => res.json()),
+    fetch(homeRequests.fetchTrending).then((res) => res.json()),
+    fetch(homeRequests.fetchActionAndAdventureShows).then((res) => res.json()),
+    fetch(homeRequests.fetchCrimeShows).then((res) => res.json()),
+    fetch(homeRequests.fetchFantasyShows).then((res) => res.json()),
+    fetch(homeRequests.fetchPopularMovies).then((res) => res.json()),
+    fetch(homeRequests.fetchComedyMovies).then((res) => res.json()),
+    fetch(homeRequests.fetchHorrorMovies).then((res) => res.json()),
+    fetch(homeRequests.fetchKidsShows).then((res) => res.json()),
+    fetch(homeRequests.fetchPoliticalDramaShows).then((res) => res.json()),
+  ]);
+
+  return {
+    props: {
+      popularShows: popularShows.results,
+      trending: trending.results,
+      actionAndAdventureShows: actionAndAdventureShows.results,
+      crimeShows: crimeShows.results,
+      fantasyShows: fantasyShows.results,
+      popularMovies: popularMovies.results,
+      comedyMovies: comedyMovies.results,
+      horrorMovies: horrorMovies.results,
+      kidsShows: kidsShows.results,
+      politicalDramaShows: politicalDramaShows.results,
+    },
+  };
+};
