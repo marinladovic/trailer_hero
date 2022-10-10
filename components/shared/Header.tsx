@@ -52,12 +52,12 @@ function Header() {
         </ul>
       </div>
       <div className="flex items-center md:space-x-4 text-sm font-light">
-        {/* <MagnifyingGlassIcon className="hidden sm:inline h-6 w-6" />
+        <MagnifyingGlassIcon className="hidden sm:inline h-6 w-6" />
         <Link href="/signin">
           <a className="hover:text-[#FE4A49] transition-colors duration-[.4s]">
             Sign In
           </a>
-        </Link> */}
+        </Link>
         <BasicMenu />
       </div>
     </header>

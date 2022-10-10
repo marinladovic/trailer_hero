@@ -66,6 +66,11 @@
     @apply flex h-9 w-9 md:h-11 md:w-11 items-center justify-center rounded-full border-2 border-[gray] bg-[#2a2a2a]/60 transition hover:border-white hover:bg-white/10;
   }
 
+  /** Search Banner component */
+  .search-banner {
+    @apply bg-[url('/assets/background.jpg')] -z-10 bg-cover bg-center bg-no-repeat relative before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-[#141414]/60;
+  }
+
   /** Loader */
   .gegga {
     width: 0;

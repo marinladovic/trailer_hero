@@ -255,7 +255,7 @@ export interface PersonDetails {
   };
 }
 
-interface PersonalCredit {
+export interface PersonalCredit {
   backdrop_path: string;
   genre_ids: number[];
   id: number;
@@ -271,4 +271,17 @@ interface PersonalCredit {
   job?: string;
   release_date?: string;
   first_air_date?: string;
+}
+
+export interface SearchResult {
+  id: number;
+  media_type: string;
+  name?: string;
+  profile_path?: string;
+  backdrop_path?: string;
+  poster_path?: string;
+  title?: string;
+  vote_average?: number;
+  vote_count?: number;
+  overview?: string;
 }

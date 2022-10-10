@@ -8,7 +8,7 @@ interface Props {
 
 function CreditThumbnail({ credit }: Props) {
   return (
-    <Link href={`/people/${credit.id}`}>
+    <Link href={`/person/${credit.id}`}>
       <div className="flex flex-col cursor-pointer space-y-2">
         <div className="relative h-[150px] min-w-[100px] ">
           <Image

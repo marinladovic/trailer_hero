@@ -19,7 +19,7 @@ function Season({ season }: Props) {
         className="w-[6rem] md:w-[9rem] h-[9rem] md:h-[12rem] rounded-l-sm object-cover"
       />
       <div className="p-2">
-        <h3 className="font-semibold tracking-wide md:text-lg">
+        <h3 className="line-clamp-2 font-semibold tracking-wide md:text-lg">
           {season.name}
         </h3>
         <p className="text-sm text-gray-400 mb-2">
