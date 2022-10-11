@@ -46,10 +46,7 @@ function MovieModal({ videoUrl }: Props) {
             playing
             muted={isMuted}
           />
-          <div className="absolute bottom-0 flex w-full items-center justify-between p-4 md:p-10">
-            <button className="modalButton">
-              <PlusIcon className="h-6 w-6" />
-            </button>
+          <div className="absolute bottom-0 flex w-full items-center justify-end p-4 md:p-10">
             <button
               onClick={() => setIsMuted(!isMuted)}
               className="modalButton"

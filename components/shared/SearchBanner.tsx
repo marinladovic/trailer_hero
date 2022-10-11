@@ -13,10 +13,10 @@ function SearchBanner() {
 
   return (
     <section className="relative w-full mb-12">
-      <div className="search-banner w-full py-40 md:py-48 lg:py-56"></div>
+      <div className="search-banner w-full py-40 md:py-48 lg:py-64"></div>
       <div className="absolute max-w-6xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 pt-8">
-        <h2 className="mb-2">Explore now</h2>
-        <h3 className="leading-none mb-8">
+        <h2 className="mb-2 lg:text-4xl">Explore now</h2>
+        <h3 className="leading-none text-shadow-md mb-8 lg:text-3xl">
           Millions of movies and TV shows to discover.
         </h3>
         <div className="relative">

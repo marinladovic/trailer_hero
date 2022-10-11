@@ -11,7 +11,11 @@ import {
   SpeakerXMarkIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
-import { Element } from '../../typings';
+import { Element, MediaItem } from '../../typings';
+import useAuth from '../../hooks/useAuth';
+import { collection, DocumentData, onSnapshot } from 'firebase/firestore';
+import { db } from '../../firebase';
+import { addToList, deleteFromList } from '../../lib/myListFunctions';
 
 interface Props {
   type?: string;
@@ -22,6 +26,11 @@ function Modal({ type }: Props) {
   const item = useRecoilValue(mediaItemState);
   const [trailer, setTrailer] = useState('');
   const [isMuted, setIsMuted] = useRecoilState(mutedState);
+  const { user } = useAuth();
+  const [addedToList, setAddedToList] = useState(false);
+  const [mediaItems, setMediaItems] = useState<DocumentData[] | MediaItem[]>(
+    []
+  );
 
   useEffect(() => {
     async function fetchTrailer() {
@@ -50,6 +59,35 @@ function Modal({ type }: Props) {
 
   const handleClose = () => {
     setShowModal(false);
+  };
+
+  // find all mediaItems in the user's myList
+  useEffect(() => {
+    if (user) {
+      return onSnapshot(
+        collection(db, 'users', user.uid, 'myList'),
+        (snapshot) => setMediaItems(snapshot.docs)
+      );
+    }
+  }, [db, item]);
+
+  // check if the mediaItem is already in the user's myList
+  useEffect(() => {
+    setAddedToList(
+      mediaItems.findIndex((result) => result.data().id === item?.id) !== -1
+    );
+  }, [mediaItems]);
+
+  const handleList = async () => {
+    if (addedToList) {
+      deleteFromList(item!, user!);
+    } else {
+      if (type) {
+        addToList(item!, user!, type);
+      } else {
+        addToList(item!, user!);
+      }
+    }
   };
 
   return (
@@ -96,8 +134,12 @@ function Modal({ type }: Props) {
             </div>
           )}
           <div className="absolute bottom-0 flex w-full items-center justify-between p-4 md:p-10">
-            <button className="modalButton">
-              <PlusIcon className="h-6 w-6" />
+            <button className="modalButton" onClick={handleList}>
+              {addedToList ? (
+                <CheckIcon className="h-6 w-6" />
+              ) : (
+                <PlusIcon className="h-6 w-6" />
+              )}
             </button>
             <button
               onClick={() => setIsMuted(!isMuted)}

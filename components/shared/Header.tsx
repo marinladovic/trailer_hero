@@ -3,8 +3,11 @@ import Link from 'next/link';
 import Logo from './Logo';
 import BasicMenu from './BasicMenu';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
+import useAuth from '../../hooks/useAuth';
+import UserMenu from './UserMenu';
 
 function Header() {
+  const { user, logout } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
 
   /** Handle header background color on scroll */
@@ -43,21 +46,24 @@ function Header() {
               <a>TV Shows</a>
             </Link>
           </li>
-          {/* <li className="headerLink">
-            <Link href="/people">
-              <a>People</a>
+          <li className="headerLink">
+            <Link href="/mylist">
+              <a>My List</a>
             </Link>
           </li>
-          <li className="headerLink">My List</li> */}
         </ul>
       </div>
       <div className="flex items-center md:space-x-4 text-sm font-light">
         <MagnifyingGlassIcon className="hidden sm:inline h-6 w-6" />
-        <Link href="/signin">
-          <a className="hover:text-[#FE4A49] transition-colors duration-[.4s]">
-            Sign In
-          </a>
-        </Link>
+        {!user ? (
+          <Link href="/login">
+            <a className="hover:text-[#FE4A49] transition-colors duration-[.4s]">
+              Sign In
+            </a>
+          </Link>
+        ) : (
+          <UserMenu />
+        )}
         <BasicMenu />
       </div>
     </header>

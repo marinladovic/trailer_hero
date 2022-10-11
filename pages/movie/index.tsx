@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
-import { mediaGenreItemsState } from '../../atoms/mediaItemAtom';
 import { genreState, modalState } from '../../atoms/modalAtom';
 import Banner from '../../components/shared/Banner';
 import Header from '../../components/shared/Header';
@@ -29,7 +28,6 @@ function Movies({
 }: Props) {
   const showModal = useRecoilValue(modalState);
   const genre = useRecoilValue(genreState);
-  const genreMovieList = useRecoilValue(mediaGenreItemsState);
   const [movies, setMovies] = useState<MediaItem[]>([]);
 
   useEffect(() => {

@@ -2,10 +2,11 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
-import { Bars3Icon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
+import useAuth from '../../hooks/useAuth';
 
-function BasicMenu() {
+function UserMenu() {
+  const { user, logout } = useAuth();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -18,7 +19,7 @@ function BasicMenu() {
   };
 
   return (
-    <div className="md:!hidden">
+    <div>
       <Button
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
@@ -27,31 +28,33 @@ function BasicMenu() {
         onClick={handleClick}
         className="!text-[#FBFEF9] !w-10 !h-10"
       >
-        <Bars3Icon className="w-7 h-7" />
+        <img
+          src="/assets/account_image.png"
+          alt="user avatar"
+          className="cursor-pointer rounded"
+        />
       </Button>
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-        className="menu"
+        className="userMenu"
         MenuListProps={{
           'aria-labelledby': 'basic-button',
         }}
       >
         <MenuItem onClick={handleClose}>
-          <Link href="/">
-            <a>Home</a>
-          </Link>
+          <p>
+            <span className="text-base font-bold">Account Information</span>
+          </p>
+        </MenuItem>
+        <MenuItem onClick={handleClose} className="!text-sm">
+          <p>Email: {user?.email}</p>
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <Link href="/movie">
-            <a>Movies</a>
-          </Link>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Link href="/tv">
-            <a>TV Shows</a>
+            <a>Reset Password</a>
           </Link>
         </MenuItem>
         <MenuItem onClick={handleClose}>
@@ -59,9 +62,14 @@ function BasicMenu() {
             <a>My List</a>
           </Link>
         </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <p onClick={logout}>
+            <span className="!text-[#FE4A49] !cursor-pointer">Logout</span>
+          </p>
+        </MenuItem>
       </Menu>
     </div>
   );
 }
 
-export default BasicMenu;
+export default UserMenu;

@@ -8,6 +8,8 @@ import homeRequests from '../utils/homeRequests';
 import { modalState } from '../atoms/modalAtom';
 import { useRecoilValue } from 'recoil';
 import SearchBanner from '../components/shared/SearchBanner';
+import useAuth from '../hooks/useAuth';
+import useList from '../hooks/useList';
 
 interface Props {
   popularShows: MediaItem[];
@@ -16,6 +18,8 @@ interface Props {
 }
 
 const Home = ({ popularShows, trending, popularMovies }: Props) => {
+  const { user } = useAuth();
+  const list = useList(user?.uid);
   const showModal = useRecoilValue(modalState);
 
   return (
@@ -32,6 +36,9 @@ const Home = ({ popularShows, trending, popularMovies }: Props) => {
       <SearchBanner />
       <main className="relative pl-4 pb-24 lg:space-y-24 lg:pl-16">
         <section className=" space-y-12 md:space-y-24">
+          {list.length > 0 && user && (
+            <Row title="My List" items={list as MediaItem[]} />
+          )}
           <Row title="Trending Now" items={trending} />
           <Row
             title="Most Popular Shows Today"

@@ -82,8 +82,8 @@ function Tv({
             <h2 className="text-shadow-md">Discover {genre.name} TV Shows</h2>
             <div className="grid max-w-7xl mx-auto grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
               {series.map((show) => (
-                <div className="mx-auto">
-                  <Thumbnail key={show.id} item={show} type="tv" />
+                <div key={show.id} className="mx-auto">
+                  <Thumbnail item={show} type="tv" />
                 </div>
               ))}
             </div>

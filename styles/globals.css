@@ -35,8 +35,9 @@
   }
 
   /** Basic Menu Component */
+
   .menu {
-    @apply md:hidden;
+    @apply md:!hidden;
   }
 
   .menu .MuiPaper-root {
@@ -48,7 +49,22 @@
   }
 
   .menu .MuiMenuItem-root {
-    @apply !block !w-64 !py-3.5 !m-0 !text-center !text-sm !text-[#b3b3b3] !transition !duration-200 first:!text-white hover:!bg-black;
+    @apply !block !w-64 !py-3.5 !m-0 !text-center !text-sm !text-[#b3b3b3] !transition !duration-200 hover:!bg-black;
+  }
+
+  /** User Menu component */
+
+  .userMenu .MuiPaper-root {
+    @apply !absolute !right-0 !rounded !border !border-[gray] !bg-[#141414] !text-white;
+  }
+
+  .userMenu .MuiMenuItem-root,
+  .userMenu .MuiMenuItem-root p {
+    @apply !block !w-64 !m-0 !text-sm !text-white !cursor-default;
+  }
+
+  .userMenu .MuiMenuItem-root a {
+    @apply !text-[#b3b3b3] hover:!text-[#FE4A49] !cursor-pointer !transition !duration-200;
   }
 
   /** Select Component */
@@ -69,6 +85,11 @@
   /** Search Banner component */
   .search-banner {
     @apply bg-[url('/assets/background.jpg')] -z-10 bg-cover bg-center bg-no-repeat relative before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-[#141414]/60;
+  }
+
+  /** Sign in/up input fields */
+  .input {
+    @apply w-full rounded bg-[#333] px-5 py-3.5 placeholder-[gray] outline-none focus:bg-[#454545];
   }
 
   /** Loader */
