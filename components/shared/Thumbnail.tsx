@@ -1,5 +1,4 @@
 import { CheckIcon, PlusIcon } from '@heroicons/react/24/outline';
-import { CircularProgress } from '@mui/material';
 import { collection, DocumentData, onSnapshot } from 'firebase/firestore';
 import Image from 'next/image';
 import Link from 'next/link';

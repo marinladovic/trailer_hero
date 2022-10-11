@@ -49,14 +49,20 @@ function UserMenu() {
             <span className="text-base font-bold">Account Information</span>
           </p>
         </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <p>
+            <span className="text-base font-bold">{user?.displayName}</span>
+          </p>
+        </MenuItem>
         <MenuItem onClick={handleClose} className="!text-sm">
           <p>Email: {user?.email}</p>
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        {/* Todo: reset Passwprd */}
+        {/* <MenuItem onClick={handleClose}>
           <Link href="/movie">
             <a>Reset Password</a>
           </Link>
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem onClick={handleClose}>
           <Link href="/mylist">
             <a>My List</a>
