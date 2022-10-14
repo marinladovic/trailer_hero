@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Header from '../components/shared/Header';
-import Banner from '../components/shared/Banner';
 import Row from '../components/shared/Row';
 import Modal from '../components/shared/Modal';
 import { MediaItem } from '../typings';

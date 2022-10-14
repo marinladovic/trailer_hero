@@ -47,6 +47,7 @@ function Person() {
               alt={`${person?.name} profile image`}
               width={500}
               height={750}
+              unoptimized
               className="rounded-md shadow-md"
             />
           </div>

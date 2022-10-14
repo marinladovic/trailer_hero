@@ -19,6 +19,7 @@ function CreditThumbnail({ credit }: Props) {
             }
             alt={credit.name}
             layout="fill"
+            unoptimized
             className="rounded-sm object-cover"
           />
         </div>

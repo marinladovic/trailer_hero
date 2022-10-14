@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import Logo from '../components/shared/Logo';
-import { auth } from '../firebase';
 import useAuth from '../hooks/useAuth';
 
 interface Inputs {
@@ -47,6 +46,7 @@ function SignUp() {
       <Image
         src="/assets/background.jpg"
         layout="fill"
+        unoptimized
         className="-z-10 !hidden opacity-60 sm:!inline"
         objectFit="cover"
       />

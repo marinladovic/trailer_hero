@@ -99,6 +99,7 @@ function Thumbnail({ item, type }: Props) {
               }`}
               className="object-cover group"
               layout="fill"
+              unoptimized
               alt={`${title || name || original_name} poster`}
             />
           ) : (
@@ -106,6 +107,7 @@ function Thumbnail({ item, type }: Props) {
               src="/assets/placeholder_poster.jpg"
               className="object-cover group"
               layout="fill"
+              unoptimized
               alt={`${title || name || original_name} poster`}
             />
           )}

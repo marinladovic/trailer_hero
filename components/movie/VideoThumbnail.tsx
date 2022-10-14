@@ -25,6 +25,7 @@ function VideoThumbnail({ video }: Props) {
         alt={`${video.name} thumbnail`}
         width={250}
         height={146}
+        unoptimized
         className="rounded-md object-cover"
       />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">

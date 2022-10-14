@@ -35,6 +35,7 @@ function Login() {
       <Image
         src="/assets/background.jpg"
         layout="fill"
+        unoptimized
         className="-z-10 !hidden opacity-60 sm:!inline"
         objectFit="cover"
       />

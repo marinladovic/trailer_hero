@@ -26,6 +26,7 @@ function SearchResult({ title, result }: Props) {
         alt={`${result.name || result.title}`}
         width={500}
         height={750}
+        unoptimized
         className="object-cover"
       />
       <p>{result.name || result.title}</p>

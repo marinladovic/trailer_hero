@@ -204,6 +204,7 @@ function Movie() {
                     alt={movie?.title}
                     width={500}
                     height={750}
+                    unoptimized
                   />
                 </div>
               </section>
